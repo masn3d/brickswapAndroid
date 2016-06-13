@@ -129,7 +129,9 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
                 fragmentClass = HomeFragment.class;
                 break;
             case R.id.search_fragment:
-                fragmentClass = SearchFragment.class;
+                fragmentClass = ResultsFragment.class;
+                bundle = new Bundle();
+                bundle.putString("userID", userID);
                 break;
             case R.id.projects_fragment:
                 fragmentClass = MyProjectsFragment.class;
@@ -138,9 +140,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
 
                 break;
             case R.id.logout_fragment: //used for temp search
-                fragmentClass = ResultsFragment.class;
-                bundle = new Bundle();
-                bundle.putString("userID", userID);
+
                 //setLogoutText();
                 break;
             default:
@@ -153,6 +153,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
 
         } catch (Exception e) {
             e.printStackTrace();
+
         }
 
         fragment.setArguments(bundle);

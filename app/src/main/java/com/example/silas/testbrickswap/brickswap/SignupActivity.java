@@ -1,27 +1,27 @@
 package com.example.silas.testbrickswap.brickswap;
 
 
-        import android.app.ProgressDialog;
-        import android.content.Intent;
-        import android.support.v7.app.AppCompatActivity;
-        import android.os.Bundle;
-        import android.view.View;
-        import android.widget.Button;
-        import android.widget.EditText;
-        import android.widget.Toast;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
-        import com.android.volley.AuthFailureError;
-        import com.android.volley.Request;
-        import com.android.volley.RequestQueue;
-        import com.android.volley.Response;
-        import com.android.volley.VolleyError;
-        import com.android.volley.toolbox.StringRequest;
-        import com.android.volley.toolbox.Volley;
-        import com.example.silas.testbrickswap.R;
-        import com.example.silas.testbrickswap.extras.StaticVariables;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.silas.testbrickswap.R;
+import com.example.silas.testbrickswap.extras.StaticVariables;
 
-        import java.util.Hashtable;
-        import java.util.Map;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -29,6 +29,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     EditText newPasswordText;
     EditText firstNameText;
     EditText lastNameText;
+    EditText phoneText;
+    EditText emailText;
+
     Button createUserButton;
     Button backToLoginButton;
     String UPLOAD_URL;
@@ -36,6 +39,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
     String KEY_NEWPASSWORD = "newUserPassword";
     String KEY_FIRSTNAME = "newFirstName";
     String KEY_LASTNAME = "newLastName";
+    String KEY_PHONE = "newPhone";
+    String KEY_EMAIL = "newEmail";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
         newPasswordText = (EditText) findViewById(R.id.newPasswordText);
         firstNameText = (EditText) findViewById(R.id.firstNameText);
         lastNameText = (EditText) findViewById(R.id.lastNameText);
+        phoneText = (EditText) findViewById(R.id.phoneText);
+        emailText = (EditText) findViewById(R.id.emailText);
 
         createUserButton = (Button) findViewById(R.id.createUserButton);
         backToLoginButton = (Button) findViewById(R.id.backToLoginButton);
@@ -93,6 +100,8 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 String newPassword = newPasswordText.getText().toString().trim();
                 String firstName = firstNameText.getText().toString().trim();
                 String lastName = lastNameText.getText().toString().trim();
+                String phone = phoneText.getText().toString().trim();
+                String email = emailText.getText().toString().trim();
 
                 //Creating parameters
                 Map<String, String> params = new Hashtable<String, String>();
@@ -102,6 +111,9 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 params.put(KEY_NEWPASSWORD, newPassword);
                 params.put(KEY_FIRSTNAME, firstName);
                 params.put(KEY_LASTNAME, lastName);
+                params.put(KEY_PHONE, phone);
+                params.put(KEY_EMAIL, email);
+
 
                 //returning parameters
                 return params;

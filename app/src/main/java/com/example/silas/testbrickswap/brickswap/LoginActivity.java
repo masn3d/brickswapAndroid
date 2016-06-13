@@ -128,7 +128,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         //Disimissing the progress dialog
                         loading.dismiss();
                         //Showing toast message of the response
-                        Toast.makeText(LoginActivity.this, "Succesful login. Welcome " + userName, Toast.LENGTH_LONG).show();
+                        Toast.makeText(LoginActivity.this, "Successful login. Welcome " + userName, Toast.LENGTH_LONG).show();
                     }
                 },
                 new Response.ErrorListener() {

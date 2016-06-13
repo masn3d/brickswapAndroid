@@ -85,12 +85,12 @@ public class ResultsFragment extends Fragment {
 
          View view = v;
 
-        String jsonURL = StaticVariables.serverUrl;
+        final String jsonURL = StaticVariables.serverUrl;
 
         //LegoSet[] legoSets;
 
         JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(
-                jsonURL,
+                jsonURL + "/posts",
                 new Response.Listener<JSONArray>() {
                     @Override
                     public void onResponse(JSONArray response) {
@@ -110,37 +110,47 @@ public class ResultsFragment extends Fragment {
 
                                 String id = responseObject.getString("_id");
                                 String title = responseObject.getString("title");
-                                String postDate = responseObject.getString("postDate");
+                                String postDate = responseObject.getString("postDate").substring(0,10);
                                 String posterId = responseObject.getString("posterId");
                                 String price = responseObject.getString("price");
                                 String productName = responseObject.getString("productName");
 
                                 JSONArray jsonArray = responseObject.getJSONArray("imageLinks");
-
+                                System.out.println("LENGTH OF JSONARRAY: " + jsonArray.length());
                                 ArrayList<String> imageList = new ArrayList<>();
 
-                                if(!imageList.isEmpty()){
+                                JSONObject jsonObject;
+                                String arrayObject;
+
+                                if(jsonArray.length() > 0){
                                 for (int j = 0; j < jsonArray.length(); j++) {
+                                    System.out.println("B4 TryCatch");
                                     try {
-                                        JSONObject jsonObject = jsonArray.getJSONObject(j);
+                                        System.out.println("B4 jsonObject = jsonArray.getJSONOBject(j) - j is: " + j + " jsonObject is: " + jsonArray.get(j));
 
-                                        //jsonObject.toString().replace("\\/","/");
-                                        //String startSub = jsonObject.toString().substring(0,23);
-                                        //String endSub = jsonObject.toString().substring(25);
-                                        //String combined = startSub + endSub;
+                                        arrayObject = jsonArray.get(j).toString();
 
-                                        //StringBuilder sb = new StringBuilder(jsonObject.toString());
-                                        //sb.deleteCharAt(24);
-                                        //String done = sb.toString();
-                                        //System.out.println("MAGIC: " + done);
+                                        /*
+                                        System.out.println("B4 lengthOfString");
+                                        int lengthOfString = new String(arrayObject.toString()).length();
+                                        System.out.println("B4 startSUB");
+                                        String startSub = arrayObject.toString().substring(0,24);
+                                        System.out.println("B4 endSub - startSub is: " + startSub);
+                                        String endSub = arrayObject.toString().substring(24, lengthOfString);
+                                        System.out.println("B4 finalURL - endSub is: " + endSub);
+                                        String finalUrl = startSub + endSub;
+                                        System.out.println("FINAL URL: " + finalUrl);
+                                        */
+                                        String finalUrl = jsonURL + "/postImages/" + arrayObject;
+                                        imageList.add(finalUrl);
 
-                                        imageList.add(jsonObject.toString());
                                     } catch (JSONException e) {
                                         e.printStackTrace();
                                     }
                                 }
                                 }
 
+                                System.out.println("ImageList is: " + imageList);
 
                                 if(!imageList.isEmpty()) {
                                     set = new LegoSet(id, postDate, posterId, price, productName, title, imageList);
@@ -156,6 +166,7 @@ public class ResultsFragment extends Fragment {
                             e.printStackTrace();
                         }
                         System.out.println("LEGO_SET_SIZE: " + legoSetsList.size());
+                        System.out.println("LEGOLIST" + legoSetsList);
 
 
                     }

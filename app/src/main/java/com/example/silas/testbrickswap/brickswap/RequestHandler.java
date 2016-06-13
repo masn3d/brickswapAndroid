@@ -1,3 +1,4 @@
+/*
 package com.example.silas.testbrickswap.brickswap;
 
 import android.app.ProgressDialog;
@@ -24,9 +25,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
-/**
- * Created by masn3d on 13-06-2016.
- */
+
 public class RequestHandler {
 
     private String UPLOAD_URL;
@@ -153,7 +152,8 @@ public class RequestHandler {
                 params.put(KEY_PRICE, price);
                 params.put(KEY_TYPE, type);
                 params.put(KEY_CITY, city);
-                params.put(KEY_POSTERID, StaticVariables.userId); //remember to change this to real posterID*/
+                params.put(KEY_POSTERID, StaticVariables.userId); //remember to change this to real posterID*//*
+
 
                 //returning parameters
                 return params;
@@ -262,3 +262,4 @@ public class RequestHandler {
 
 
 }
+*/

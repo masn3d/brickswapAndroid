@@ -50,6 +50,22 @@
         android:hint="Last Name"
         android:inputType="textPersonName" />
 
+    <EditText
+        android:id="@+id/phoneText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Phone"
+        android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/emailText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textPersonName" />
+
     <Button
         android:id="@+id/createUserButton"
         android:layout_width="match_parent"
@@ -61,15 +77,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Back To Login"/>
-
-    <EditText
-        android:id="@+id/signUpServerUrlText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:hint="server url"
-        android:inputType="textPersonName"
-        android:text="" />
 
 
 </LinearLayout>
