@@ -13,6 +13,7 @@ public class LegoSet {
     private String price;
     private String productName;
     private String title;
+    private String description;
     private ArrayList<String> imageList;
 
     public LegoSet(String id, String postDate, String posterID, String price, String productName, String title, ArrayList imageList) {
@@ -80,6 +81,14 @@ public class LegoSet {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String title) {
+        this.description = description;
     }
 
     public ArrayList getImageList() {

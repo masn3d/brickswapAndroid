@@ -1,12 +1,14 @@
 package com.example.silas.testbrickswap.brickswap;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -21,6 +23,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.example.silas.testbrickswap.R;
 import com.example.silas.testbrickswap.extras.GlobalVariables;
 import com.example.silas.testbrickswap.extras.StaticVariables;
+import com.example.silas.testbrickswap.interfaces.IFragmentListener;
 import com.example.silas.testbrickswap.network.ServerFacade;
 import com.example.silas.testbrickswap.network.VolleySingleton;
 
@@ -32,23 +35,11 @@ import java.util.ArrayList;
 
 import javax.xml.transform.ErrorListener;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ResultsFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
 public class ResultsFragment extends Fragment {
 
     GlobalVariables gv = new GlobalVariables();
-
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    IFragmentListener activityCommander;
 
     VolleySingleton volleySingleton;
     RequestQueue requestQueue;
@@ -62,16 +53,16 @@ public class ResultsFragment extends Fragment {
     public ResultsFragment() {
         // Required empty public constructor
     }
+/*
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ResultsFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM2 = "param2";
+
+    private String mParam1;
+    private String mParam2;
+
+
+
     public static ResultsFragment newInstance(String param1, String param2) {
         ResultsFragment fragment = new ResultsFragment();
         Bundle args = new Bundle();
@@ -81,7 +72,57 @@ public class ResultsFragment extends Fragment {
         return fragment;
     }
 
-     public JsonArrayRequest getAllPosts(RequestQueue requestQueue, View v) {
+*/
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        // Inflate the layout for this fragment
+        resultsView = inflater.inflate(R.layout.fragment_list_view, container, false);
+
+        TextView text = (TextView) resultsView.findViewById(R.id.tempTextView);
+
+        volleySingleton = VolleySingleton.getInstance();
+        requestQueue = volleySingleton.getRequestQueue();
+
+        searchText = getArguments().getString("input");
+
+        requestQueue.add(getAllPosts(requestQueue, resultsView));
+
+        final ListAdapter legoListAdapter = new CustomAdapter(getContext(), legoSetsList);
+        final ListView legoListView = (ListView) resultsView.findViewById(R.id.projectsListView);
+        legoListView.setAdapter(legoListAdapter);
+
+
+        legoListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+               // LegoSet listItem = (LegoSet) legoListView.getItemAtPosition(position);
+                LegoSet listItem = (LegoSet) legoListAdapter.getItem(position);
+
+                System.out.println("DETAILS CLICK: " + listItem.getTitle());
+                listItemClicked(listItem);
+
+            }
+        });
+
+        return resultsView;
+    }
+
+
+    @Override
+    public void onAttach(Context context) {
+        super.onAttach(context);
+        try{
+            activityCommander = (IFragmentListener) context;
+        }catch (ClassCastException e){
+            throw new ClassCastException(context.toString());
+        }
+
+    }
+
+    public JsonArrayRequest getAllPosts(RequestQueue requestQueue, View v) {
 
          View view = v;
 
@@ -129,18 +170,6 @@ public class ResultsFragment extends Fragment {
                                         System.out.println("B4 jsonObject = jsonArray.getJSONOBject(j) - j is: " + j + " jsonObject is: " + jsonArray.get(j));
 
                                         arrayObject = jsonArray.get(j).toString();
-
-                                        /*
-                                        System.out.println("B4 lengthOfString");
-                                        int lengthOfString = new String(arrayObject.toString()).length();
-                                        System.out.println("B4 startSUB");
-                                        String startSub = arrayObject.toString().substring(0,24);
-                                        System.out.println("B4 endSub - startSub is: " + startSub);
-                                        String endSub = arrayObject.toString().substring(24, lengthOfString);
-                                        System.out.println("B4 finalURL - endSub is: " + endSub);
-                                        String finalUrl = startSub + endSub;
-                                        System.out.println("FINAL URL: " + finalUrl);
-                                        */
                                         String finalUrl = jsonURL + "/postImages/" + arrayObject;
                                         imageList.add(finalUrl);
 
@@ -185,28 +214,6 @@ public class ResultsFragment extends Fragment {
         return this.resultsView;
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        resultsView = inflater.inflate(R.layout.fragment_list_view, container, false);
-
-        TextView text = (TextView) resultsView.findViewById(R.id.tempTextView);
-
-        volleySingleton = VolleySingleton.getInstance();
-        requestQueue = volleySingleton.getRequestQueue();
-
-        searchText = getArguments().getString("input");
-
-        requestQueue.add(getAllPosts(requestQueue, resultsView));
-
-        ListAdapter legoListAdapter = new CustomAdapter(getContext(), legoSetsList);
-        ListView legoListView = (ListView) resultsView.findViewById(R.id.projectsListView);
-        legoListView.setAdapter(legoListAdapter);
-
-        return resultsView;
-    }
-
 
     private void setUpAdapter(View resultsView){
 
@@ -216,10 +223,10 @@ public class ResultsFragment extends Fragment {
     }
 
 
-    private void parseJSONResponse(JSONObject response){
-        if (response == null || response.length() == 0){
-            return;
-        }
+    public void listItemClicked(LegoSet item){
+        System.out.println("listItemClicked: " + item.getPosterID() + " " + item.getId());
+        activityCommander.getDetails(item);
     }
+
 
 }

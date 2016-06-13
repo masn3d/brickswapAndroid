@@ -175,6 +175,7 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
 
         Fragment fragment = null;
         Class fragmentClass = ListViewFragment.class;
+
         Bundle bundle = new Bundle();
         bundle.putString("userID", userID);
         bundle.putString("input", text);
@@ -191,6 +192,41 @@ public class MainActivity extends AppCompatActivity implements IFragmentListener
 
     }
 
+    @Override
+    public void getDetails(LegoSet item) {
+
+        String posterID = item.getPosterID();
+        String postID = item.getId();
+
+
+        Fragment fragment = null;
+        Class fragmentClass = DetailsFragment.class;
+
+        Bundle bundle = new Bundle();
+        bundle.putString("posterID", posterID);
+        bundle.putString("postID", postID);
+
+
+
+
+        try {
+            fragment = (Fragment) fragmentClass.newInstance();
+            fragment.setArguments(bundle);
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+
+
+      //  DetailsFragment detailsFragment = (DetailsFragment) getSupportFragmentManager().findFragmentByTag("detailsFragment");
+      //  detailsFragment.setLegoSetData(item);
+
+
+    }
 
     public void setLogoutText() {
         TextView logout;
