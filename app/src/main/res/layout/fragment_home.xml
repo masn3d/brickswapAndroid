@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    tools:context=".brickswap.MainActivity"
+    >
+
+
+
+    <ListView
+        android:layout_width="fill_parent"
+        android:layout_height="350dp"
+        android:id="@+id/homeListView"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:id="@+id/imageView"
+        android:src="@mipmap/header"
+        android:layout_above="@+id/homeListView"
+        android:layout_alignParentRight="false"
+        android:layout_alignParentEnd="false" />
+
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="90dp"
+        android:textSize="65dp"
+        android:textColor="@android:color/secondary_text_light"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="BrickSwap"
+        android:id="@+id/brickSwapText"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+
+</RelativeLayout>

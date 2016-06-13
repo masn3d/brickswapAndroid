@@ -1,0 +1,21 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home_fragment"
+            android:icon="@mipmap/homewhite"
+            android:title="Home" />
+        <item
+            android:id="@+id/search_fragment"
+            android:icon="@mipmap/searchwhite"
+            android:title="Search" />
+        <item
+            android:id="@+id/projects_fragment"
+            android:icon="@mipmap/projectswhite"
+            android:title="My Projects" />
+        <item
+            android:id="@+id/logout_fragment"
+            android:icon="@mipmap/offwhite"
+            android:title="Log Out" />
+    </group>
+</menu>

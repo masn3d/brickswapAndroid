@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_name">BrickSwap</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="drawer_open">Open Navigation Drawer</string>
+    <string name="drawer_close">Close Navigation Drawer</string>
+
+    <string-array name="Lego_types">
+        <item>Other</item>
+        <item>Angry Birds</item>
+        <item>Chima</item>
+        <item>City</item>
+        <item>Duplo</item>
+        <item>Friends</item>
+        <item>Ninjago</item>
+        <item>Star Wars</item>
+        <item>Super Heroes</item>
+    </string-array>
+
+
+    <string-array name="drawerEntries">
+        <item>Home</item>
+        <item>Search Projects</item>
+        <item>My Projects</item>
+        <item>Log Out</item>
+
+    </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="logoutText">You have been logged out!</string>
+    <string name="loginText">Please login to continue:</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_login_activty">LoginActivty</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
